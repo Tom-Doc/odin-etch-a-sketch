@@ -1,6 +1,6 @@
 'use strict';
 
-const sizeOfGrid = 16;
+const sizeOfGrid = 32;
 const container = document.querySelector('.container');
 
 const createGrid = (gridAmount) => {
@@ -16,6 +16,10 @@ const createGrid = (gridAmount) => {
             gridBox.style.width = `${widthAndHeight}px`
             gridBox.style.height = `${widthAndHeight}px`
             row.appendChild(gridBox); // now we put "grid-box" into "grid-row" that is above. Append will put it NEXT to the element, but appendChild will put it INSIDE of the element. 
+            // mouseenter for drawing
+            gridBox.addEventListener('mouseenter', () => { //mouseenter is an event that is fired when the mouse is initially moved so that it's hotspot is within the element at which the event was fired. 
+                gridBox.style.backgroundColor = 'black';   // This is inside the loop and not after createGrid(sizeofGrid) otherwise the grid boxes arent drawn to the DOM yet.
+            })
         }
         container.appendChild(row); // now that the loops has completed we will add our row of 16 blocks
     }
