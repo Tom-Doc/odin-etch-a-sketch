@@ -3,7 +3,21 @@
 // const sizeOfGrid = 8;
 const container = document.querySelector('.container');
 const resetButton = document.querySelector('.reset-page');
-const eraseButton = document.querySelector('.erase-grid')
+const eraseButton = document.querySelector('.erase-grid');
+const blackPen = document.querySelector('.black-pen');
+const rgbPen = document.querySelector('.rgb-pen')
+
+//function to create out RGB color pen
+const randomRgbPen = () => {
+    const r = Math.floor(Math.random() * 256); //RGB colors go from 1 to 255 so this will random select an RGB color between 1 and 255.
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+    return {
+        r,
+        g,
+        b
+    };
+}
 
 let gridNumber = [0];
 
@@ -16,6 +30,12 @@ const createGrid = (gridAmount) => {
         row.classList.add('grid-row') // and then we give it a class name "grid-row"
 
         for (let j = 0; j < gridAmount; j++) { // j = o, is j < 16? if so, go into loop below 
+            const {
+                r,
+                g,
+                b
+            } = randomRgbPen(); //Calling out RGB Pen function
+            console.log('1', r, '2', g, '3', b);
             const widthAndHeight = 960 / gridAmount
             const gridBox = document.createElement('div') // Since i < 16 we create a div
             gridBox.classList.add('grid-box') // and then we give it a class name "grid-box"
@@ -23,8 +43,16 @@ const createGrid = (gridAmount) => {
             gridBox.style.height = `${widthAndHeight}px`
             row.appendChild(gridBox); // now we put "grid-box" into "grid-row" that is above. Append will put it NEXT to the element, but appendChild will put it INSIDE of the element. 
             // mouseenter for drawing
-            gridBox.addEventListener('mousemove', () => { //mouseenter is an event that is fired when the mouse is initially moved so that it's hotspot is within the element at which the event was fired. 
-                gridBox.style.backgroundColor = 'black'; // This is inside the loop and not after createGrid(sizeofGrid) otherwise the grid boxes arent drawn to the DOM yet.
+            blackPen.addEventListener('click', () => { //eventListener so we can now click the Black pen button to draw in black
+                gridBox.addEventListener('mousemove', () => { //mouseenter is an event that is fired when the mouse is initially moved so that it's hotspot is within the element at which the event was fired. 
+                    gridBox.style.backgroundColor = 'black'; // This is inside the loop and not after createGrid(sizeofGrid) otherwise the grid boxes arent drawn to the DOM yet.
+                })
+            })
+            rgbPen.addEventListener('click', () => { //eventListener for RBG Pen
+                gridBox.addEventListener('mousemove', () => { 
+                    const bgColor = 'rgb(' + r + ',' + g + ',' + b + ')';
+                    gridBox.style.backgroundColor = bgColor; 
+                })
             })
         }
         wrapper.appendChild(row); // now that the loops has completed we will add our row of 16 blocks
@@ -39,6 +67,7 @@ resetButton.addEventListener('click', () => {
     while (gridNumber > 100) {
         gridNumber = prompt('Please select grid size below 100'); //If user selected 100+ they're asked again
     }
+    //TOMORROW SEE IF YOU CAN MAKE THIS INTO A FUNCTION SO WE CAN FOLLOW 'DRY'
     const wrapper = document.querySelector('.wrapper');
     if (!wrapper) { //If wrapper is not a thing then create the grid below
         createGrid(gridNumber);
@@ -57,5 +86,6 @@ eraseButton.addEventListener('click', () => {
         createGrid(gridNumber);
     }
 })
+
 
 // createGrid(sizeOfGrid);
