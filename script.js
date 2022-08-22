@@ -5,7 +5,8 @@ const container = document.querySelector('.container');
 const resetButton = document.querySelector('.reset-page');
 const eraseButton = document.querySelector('.erase-grid');
 const blackPen = document.querySelector('.black-pen');
-const rgbPen = document.querySelector('.rgb-pen')
+const rgbPen = document.querySelector('.rgb-pen');
+const opacityPen = document.querySelector('.opacity-pen');
 
 //function to create out RGB color pen
 const randomRgbPen = () => {
@@ -35,7 +36,6 @@ const createGrid = (gridAmount) => {
                 g,
                 b
             } = randomRgbPen(); //Calling out RGB Pen function
-            console.log('1', r, '2', g, '3', b);
             const widthAndHeight = 960 / gridAmount
             const gridBox = document.createElement('div') // Since i < 16 we create a div
             gridBox.classList.add('grid-box') // and then we give it a class name "grid-box"
@@ -49,11 +49,24 @@ const createGrid = (gridAmount) => {
                 })
             })
             rgbPen.addEventListener('click', () => { //eventListener for RBG Pen
-                gridBox.addEventListener('mousemove', () => { 
+                gridBox.addEventListener('mousemove', () => {
                     const bgColor = 'rgb(' + r + ',' + g + ',' + b + ')';
-                    gridBox.style.backgroundColor = bgColor; 
+                    gridBox.style.backgroundColor = bgColor;
                 })
             })
+
+            opacityPen.addEventListener('click', () => {
+                gridBox.addEventListener('mouseenter', () => {
+                    const currentOpacity = Number(gridBox.style.opacity)
+                    gridBox.style.backgroundColor = 'black'
+                    gridBox.style.opacity = currentOpacity + .1
+
+
+
+                })
+            })
+
+
         }
         wrapper.appendChild(row); // now that the loops has completed we will add our row of 16 blocks
     }
