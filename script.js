@@ -1,6 +1,5 @@
 'use strict';
 
-// const sizeOfGrid = 8;
 const container = document.querySelector('.container');
 const resetButton = document.querySelector('.reset-page');
 const eraseButton = document.querySelector('.erase-grid');
@@ -20,8 +19,10 @@ const randomRgbPen = () => {
     };
 }
 
+//Array for storing grid size selected by user
 let gridNumber = [0];
 
+//Function for creating grid
 const createGrid = (gridAmount) => {
     const wrapper = document.createElement('div')
     wrapper.classList.add('wrapper') // This is here so that down below in our reset button we can grab and remove the wapper
@@ -35,7 +36,7 @@ const createGrid = (gridAmount) => {
                 r,
                 g,
                 b
-            } = randomRgbPen(); //Calling out RGB Pen function
+            } = randomRgbPen(); //Calling the RGB Pen function
             const widthAndHeight = 960 / gridAmount
             const gridBox = document.createElement('div') // Since i < 16 we create a div
             gridBox.classList.add('grid-box') // and then we give it a class name "grid-box"
@@ -59,7 +60,7 @@ const createGrid = (gridAmount) => {
                 gridBox.addEventListener('mouseenter', () => {
                     const currentOpacity = Number(gridBox.style.opacity)
                     gridBox.style.backgroundColor = 'black'
-                    gridBox.style.opacity = currentOpacity + .1
+                    gridBox.style.opacity = currentOpacity + .1 //This will take the opacity and add .1 after each pass until we have reached a black colored block.
 
 
 
@@ -80,7 +81,6 @@ resetButton.addEventListener('click', () => {
     while (gridNumber > 100) {
         gridNumber = prompt('Please select grid size below 100'); //If user selected 100+ they're asked again
     }
-    //TOMORROW SEE IF YOU CAN MAKE THIS INTO A FUNCTION SO WE CAN FOLLOW 'DRY'
     const wrapper = document.querySelector('.wrapper');
     if (!wrapper) { //If wrapper is not a thing then create the grid below
         createGrid(gridNumber);
@@ -92,13 +92,10 @@ resetButton.addEventListener('click', () => {
 
 eraseButton.addEventListener('click', () => {
     const wrapper = document.querySelector('.wrapper');
-    if (!wrapper) { //If wrapper is not a thing then create the grid below
+    if (!wrapper) { 
         createGrid(gridNumber);
-    } else { // if wrapper IS a thing then remove the old wrapper (old grid) and create a new one.
+    } else { 
         wrapper.remove()
         createGrid(gridNumber);
     }
-})
-
-
-// createGrid(sizeOfGrid);
+});
