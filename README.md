@@ -1,2 +1,5 @@
 # odin-etch-a-sketch
-The Odin Project's Etch-a-Sketch 
+
+The Odin Project's Etch-a-Sketch
+
+I started this Etch-a-Sketch project on 8/14/22 and finished it on 8/21/22. I spent 4 days working on it and that was with a little over an hour each day, so the project took me around 5hrs to complete. I spent a lot of time Googling and watching Youtube videos on how to create the grid. Figuring out the grid was definitely the most difficult part. The 2nd most difficult part was probably trying to figure out the Erase button. I couldn't get it to work where it would erase the grid, but at the same time keep the original grid size that the user chose. One night in bed it then dawned on me that I could use something I learned from my Javascript Udemy course. I could store the users grid size selection in an array and then use that saved number in the array inside of the erase button. That way if the user picked a 32x32 grid when they erased the grid they would have a blank 32x32 grid again. I went into this project with a lot more confidence than I did with the Rock, Paper, Scissors project and I think because I went in with a lot more confidence that it allowed me to have a lot more fun. Not only was it a fun project, but I also learned a lot from working on it.
